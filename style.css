@@ -13,7 +13,18 @@ document.addEventListener('DOMContentLoaded', function() {
   }, {
     threshold: 0.1
   });
-  
+  .logo-img {
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
+}
+
+/* Pour les écrans mobiles */
+@media (max-width: 576px) {
+    .logo-img {
+        height: 30px;
+    }
+}
   animatedElements.forEach(element => {
     element.style.opacity = 0;
     element.style.transform = 'translateY(20px)';
@@ -87,4 +98,5 @@ document.addEventListener('DOMContentLoaded', function() {
   counterElement.textContent = `👁️ ${views} vues`;
   
   document.body.appendChild(counterElement);
+
 });
