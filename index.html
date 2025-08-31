@@ -1,513 +1,324 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>REDASP.com</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>REDASP.com — Premium Snake-Inspired Brand Domain</title>
+  <meta name="theme-color" content="#e30613" />
+
+  <style>
+    /* ===============================
+       Chain-style: dark + glass + neon
+    ================================ */
+    :root{
+      --primary:#e30613;
+      --primary-2:#c10510;
+      --bg:#050507;
+      --bg-2:#0a0b10;
+      --text:#F3F5F7;
+      --muted:#a4a9b6;
+      --border:rgba(255,255,255,0.08);
+      --rad:16px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --glow:0 0 40px rgba(227,6,19,.25);
+      --grid: radial-gradient(circle at 1px 1px, rgba(255,255,255,.06) 1px, transparent 1px);
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --text:#0b0d12; --muted:#475167; --bg:#f8f9fb; --bg-2:#ffffff; --border:rgba(0,0,0,.08); }
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color:var(--text); background:var(--bg);
+      background-image:
+        linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.55)),
+        url('images/hero-bg.jpg'),
+        var(--grid);
+      background-size: cover, cover, 24px 24px;
+      background-attachment: fixed, fixed, fixed;
+      background-position: center, center, top left;
+      letter-spacing:.2px;
+    }
+
+    /* Subtle animated grain */
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none;
+      background:
+        radial-gradient(50% 50% at 50% 50%, rgba(227,6,19,.12), transparent 65%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 2px, transparent 2px 4px);
+      mix-blend-mode: screen; opacity:.6;
+    }
+
+    .container{ max-width:1200px; margin:0 auto; padding:0 24px; }
+
+    /* Header (no logo per your request) */
+    header{ position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px);
+      background:linear-gradient(to right, rgba(10,12,18,.55), rgba(10,12,18,.35));
+      border-bottom:1px solid var(--border);
+    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
+    .brand{ font-weight:800; letter-spacing:.5px; font-size:1rem; color:var(--muted); text-transform:uppercase; }
+    nav ul{ display:flex; gap:22px; list-style:none; margin:0; padding:0; }
+    nav a{
+      color:var(--muted); text-decoration:none; font-weight:600; font-size:.95rem; transition:color .2s ease;
+    }
+    nav a:hover{ color:var(--text); }
+
+    /* Hero */
+    .hero{
+      min-height:88svh; display:grid; place-items:center;
+      text-align:center; position:relative;
+      padding:6rem 1rem 4rem;
+      isolation:isolate;
+    }
+    .hero::after{
+      content:""; position:absolute; inset:0; z-index:-1;
+      background:
+        radial-gradient(60% 40% at 50% 20%, rgba(227,6,19,.25), transparent 60%),
+        radial-gradient(40% 30% at 80% 70%, rgba(227,6,19,.18), transparent 65%),
+        linear-gradient(to bottom, rgba(5,5,9,.2), rgba(5,5,9,.65));
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.35rem .7rem; font-size:.8rem; font-weight:700; letter-spacing:.4px;
+      border:1px solid rgba(227,6,19,.35);
+      border-radius:999px;
+      background:linear-gradient(to right, rgba(227,6,19,.12), rgba(227,6,19,.05));
+      box-shadow: var(--glow);
+    }
+    .title{
+      margin:1rem 0 .75rem; font-size:clamp(2.2rem, 6vw, 4rem); line-height:1.05; font-weight:900;
+      background:linear-gradient(135deg, var(--text) 20%, #ffbcc1 40%, var(--text) 60%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      text-shadow: 0 8px 40px rgba(227,6,19,.15);
+    }
+    .subtitle{
+      color:var(--muted); font-size:clamp(1rem, 2.2vw, 1.25rem); max-width:820px; margin:0 auto 2rem;
+    }
+
+    .cta-row{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+    .btn{
+      appearance:none; border:none; cursor:pointer; text-decoration:none;
+      padding:14px 22px; border-radius:14px; font-weight:800; letter-spacing:.4px; font-size:1rem;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+      box-shadow: var(--glow);
+    }
+    .btn-primary{
+      color:white;
+      background:linear-gradient(135deg, var(--primary), var(--primary-2));
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 12px 40px rgba(227,6,19,.35); }
+    .btn-ghost{
+      color:var(--text);
+      background:linear-gradient(to bottom right, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      backdrop-filter: blur(8px) saturate(120%);
+    }
+    .btn-ghost:hover{ transform:translateY(-2px); }
+
+    /* Sections */
+    section{ padding:90px 0; }
+    h2{ font-size:clamp(1.6rem, 3.2vw, 2.4rem); margin:0 0 28px; }
+    .grid{
+      display:grid; gap:20px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .card{
+      grid-column: span 4;
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:var(--rad); padding:22px; box-shadow:var(--shadow);
+      backdrop-filter: blur(10px) saturate(130%);
+      position:relative; overflow:hidden;
+    }
+    .card::before{
+      content:""; position:absolute; inset:-1px;
+      border-radius:inherit; padding:1px;
+      background:linear-gradient(135deg, rgba(255,255,255,.18), rgba(227,6,19,.35), rgba(255,255,255,.08));
+      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      pointer-events:none;
+    }
+    .card h3{ margin:0 0 8px; font-size:1.1rem }
+    .card p{ margin:0; color:var(--muted) }
+
+    .card.span-6{ grid-column: span 6; }
+    .card.span-12{ grid-column: span 12; }
+
+    /* Table (glass) */
+    .table{
+      width:100%; border-collapse:collapse; overflow:hidden;
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid var(--border); border-radius:var(--rad); box-shadow:var(--shadow);
+      backdrop-filter: blur(10px) saturate(130%);
+    }
+    .table th, .table td{ padding:16px 18px; text-align:left; border-bottom:1px solid var(--border); }
+    .table th{ color:#dfe2e6; font-weight:700; letter-spacing:.3px; }
+    .table tr:last-child td{ border-bottom:none }
+
+    /* Footer */
+    footer{ padding:50px 0; color:var(--muted); text-align:center; border-top:1px solid var(--border);
+      background:linear-gradient(to right, rgba(10,12,18,.55), rgba(10,12,18,.35)); backdrop-filter: blur(8px);
+    }
+
+    /* Animations */
+    .animate{ opacity:0; transform: translateY(18px); }
+    .show{ opacity:1 !important; transform:none !important; transition: opacity .8s ease, transform .8s ease; }
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .card{ grid-column: span 6 }
+      .card.span-6{ grid-column: span 12 }
+    }
+    @media (max-width: 640px){
+      .grid{ grid-template-columns: repeat(6, 1fr) }
+      .card{ grid-column: span 6 }
+      .title{ letter-spacing:.2px }
+      .cta-row{ gap:10px }
+      section{ padding:70px 0 }
+    }
+  </style>
 </head>
+
 <body>
-  
-  <section class="hero animate">
-    <div>
-      <h1>Welcome to <span style="color:red;">REDASP</span></h1>
-      <p>The Futuristic Domain Marketplace</p>
+  <!-- Header (no logo) -->
+  <header>
+    <div class="container nav">
+      <div class="brand">REDASP.COM</div>
+      <nav>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#info">Domain Info</a></li>
+          <li><a href="#uses">Use Cases</a></li>
+          <li><a href="#cta">Get It</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <span class="badge animate">Snake-Inspired • Premium .COM</span>
+      <h1 class="title animate">Own <span style="color:#ff4852">REDASP.com</span></h1>
+      <p class="subtitle animate">
+        <strong>RED ASP</strong> evokes speed, strength, and prestige. A short, bold, memorable brand for crypto, luxury, gaming, or tech.
+      </p>
+      <div class="cta-row animate">
+        <a class="btn btn-primary" href="https://unstoppabledomains.com/d/redasp.com" target="_blank" rel="noopener">Buy on Unstoppable</a>
+        <a class="btn btn-ghost" href="#features">Why this name?</a>
+      </div>
     </div>
   </section>
 
-  <script src="script.js"></script>
-</body>
-</html>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REDASP.com - Premium Snake-Inspired Brand Domain</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #e30613;
-            --primary-dark: #c10510;
-            --secondary: #1a1a1a;
-            --text: #333333;
-            --text-light: #666666;
-            --background: #ffffff;
-            --background-alt: #f8f8f8;
-            --border: #eaeaea;
-            --radius: 12px;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --background: #0a0a0a;
-                --background-alt: #111111;
-                --text: #f1f1f1;
-                --text-light: #aaaaaa;
-                --border: #222222;
-                --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background-color: var(--background);
-            padding: 0;
-            margin: 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Header & Navigation */
-        header {
-            padding: 2rem 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--text);
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            color: var(--primary);
-            font-size: 1.8rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 6rem 0;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-light);
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: var(--radius);
-            font-weight: 600;
-            text-decoration: none;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-        }
-
-        .cta-button:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(227, 6, 19, 0.2);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 6rem 0;
-            background-color: var(--background-alt);
-            border-radius: var(--radius);
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background-color: var(--background);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        /* Domain Info Section */
-        .domain-info {
-            padding: 6rem 0;
-        }
-
-        .info-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            background-color: var(--background);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .info-table th, .info-table td {
-            padding: 1.25rem 1.5rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .info-table th {
-            background-color: var(--background-alt);
-            font-weight: 600;
-        }
-
-        .info-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        /* Use Cases Section */
-        .use-cases {
-            padding: 6rem 0;
-            background-color: var(--background-alt);
-            border-radius: var(--radius);
-        }
-
-        .cases-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .case-card {
-            background-color: var(--background);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .case-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .case-icon {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        /* Final CTA Section */
-        .final-cta {
-            padding: 6rem 0;
-            text-align: center;
-        }
-
-        .final-cta h2 {
-            margin-bottom: 1.5rem;
-        }
-
-        .final-cta p {
-            color: var(--text-light);
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Footer */
-        footer {
-            padding: 3rem 0;
-            text-align: center;
-            color: var(--text-light);
-            border-top: 1px solid var(--border);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            h2 {
-                font-size: 2rem;
-            }
-            
-            nav ul {
-                gap: 1.5rem;
-            }
-            
-            .hero, .features, .domain-info, .use-cases, .final-cta {
-                padding: 4rem 0;
-            }
-        }
-
-        @media (max-width: 576px) {
-            header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            nav ul {
-                gap: 1rem;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .container {
-                padding: 0 1.5rem;
-            }
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate {
-            animation: fadeIn 1s ease-out forwards;
-        }
-
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-    </style>
-</head>
-<body>
+  <!-- Features -->
+  <section id="features">
     <div class="container">
-        <header>
-           <a href="#" class="logo">
-            <img src="assets/images/logo.png" alt="Logo" class="logo-img">
-              REDASP.com
-           </a>
-            <nav>
-                <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#info">Domain Info</a></li>
-                    <li><a href="#uses">Use Cases</a></li>
-                    <li><a href="#cta">Get It Now</a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <section class="hero">
-            <h1 class="animate">Own REDASP.com – The Snake-Inspired Premium Brand Domain</h1>
-            <p class="animate delay-1">REDASP stands for <strong>Red Asp</strong> – a powerful snake symbolizing speed, strength, and prestige. Short. Bold. Memorable. Perfect for crypto, luxury, gaming, or tech.</p>
-            <a href="https://unstoppabledomains.com/d/redasp.com" class="cta-button animate delay-2">Buy on Unstoppable Domains</a>
-        </section>
-
-        <section class="features" id="features">
-            <h2 class="animate">Why REDASP.com?</h2>
-            <div class="features-grid">
-                <div class="feature-card animate">
-                    <i class="fas fa-bolt feature-icon"></i>
-                    <h3>Symbolic Power</h3>
-                    <p>Derived from <em>Red Asp</em>, a snake historically tied to danger, wisdom, and royalty.</p>
-                </div>
-                <div class="feature-card animate delay-1">
-                    <i class="fas fa-crown feature-icon"></i>
-                    <h3>Brand-Ready</h3>
-                    <p>Strong, simple, and unforgettable. Establishes immediate authority in any niche.</p>
-                </div>
-                <div class="feature-card animate delay-2">
-                    <i class="fas fa-globe feature-icon"></i>
-                    <h3>Global Appeal</h3>
-                    <p>Easy to spell, pronounce, and market internationally with no confusing elements.</p>
-                </div>
-                <div class="feature-card animate delay-1">
-                    <i class="fas fa-history feature-icon"></i>
-                    <h3>Established Trust</h3>
-                    <p>23 years old, adding credibility and authority that new domains can't match.</p>
-                </div>
-                <div class="feature-card animate delay-2">
-                    <i class="fas fa-chart-line feature-icon"></i>
-                    <h3>Marketing Advantage</h3>
-                    <p>SEO-friendly, brandable, and high CPC potential for advertising campaigns.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="domain-info" id="info">
-            <h2 class="animate">Domain Insights</h2>
-            <table class="info-table">
-                <tr>
-                    <th>Detail</th>
-                    <th>Information</th>
-                </tr>
-                <tr>
-                    <td><strong>Domain</strong></td>
-                    <td>REDASP.com</td>
-                </tr>
-                <tr>
-                    <td><strong>Meaning</strong></td>
-                    <td>"Red Asp" – a striking snake, symbol of power and prestige</td>
-                </tr>
-                <tr>
-                    <td><strong>Age</strong></td>
-                    <td>23 years (established authority)</td>
-                </tr>
-                <tr>
-                    <td><strong>Extension</strong></td>
-                    <td>.com – the gold standard for serious businesses</td>
-                </tr>
-                <tr>
-                    <td><strong>Archive History</strong></td>
-                    <td><a href="https://web.archive.org/web/20250000000000*/redasp.com" target="_blank">Verify on Archive.org</a></td>
-                </tr>
-            </table>
-        </section>
-
-        <section class="use-cases" id="uses">
-            <h2 class="animate">Possible Applications</h2>
-            <div class="cases-grid">
-                <div class="case-card animate">
-                    <i class="fas fa-coins case-icon"></i>
-                    <h3>Crypto & Blockchain</h3>
-                    <p>Token, DeFi project, or exchange with a strong animal brand identity.</p>
-                </div>
-                <div class="case-card animate delay-1">
-                    <i class="fas fa-gem case-icon"></i>
-                    <h3>Luxury Brand</h3>
-                    <p>Red Asp evokes exclusivity, prestige, and boldness for high-end products.</p>
-                </div>
-                <div class="case-card animate delay-2">
-                    <i class="fas fa-gamepad case-icon"></i>
-                    <h3>Gaming / Esports</h3>
-                    <p>Perfect for a fierce team or futuristic gaming brand with attitude.</p>
-                </div>
-                <div class="case-card animate delay-1">
-                    <i class="fas fa-microchip case-icon"></i>
-                    <h3>Tech Startup</h3>
-                    <p>A sharp and powerful name for cutting-edge innovations and SaaS products.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="final-cta" id="cta">
-            <h2 class="animate">Secure Your Premium Domain</h2>
-            <p class="animate delay-1">REDASP.com is a rare, premium, snake-inspired brand. Once it's gone, it's gone forever.</p>
-            <a href="https://unstoppabledomains.com/d/redasp.com" class="cta-button animate delay-2">Get REDASP.com Now</a>
-        </section>
-
-        <footer>
-            <p>© 2025 REDASP.com • Premium Domain Name</p>
-        </footer>
+      <h2 class="animate">Why REDASP.com?</h2>
+      <div class="grid">
+        <div class="card animate">
+          <h3>Symbolic Power</h3>
+          <p>“Red Asp” — a striking snake linked to danger, wisdom, and royalty.</p>
+        </div>
+        <div class="card animate">
+          <h3>Brand-Ready</h3>
+          <p>Strong, simple, unforgettable. Instant authority across niches.</p>
+        </div>
+        <div class="card animate">
+          <h3>Global Appeal</h3>
+          <p>Easy to spell, pronounce, and market worldwide.</p>
+        </div>
+        <div class="card animate">
+          <h3>Established Trust</h3>
+          <p>23 years old — credibility that new domains can’t match.</p>
+        </div>
+        <div class="card animate">
+          <h3>Marketing Advantage</h3>
+          <p>SEO-friendly, brandable, and high CPC potential.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <script>
-        // Simple animation on scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const animatedElements = document.querySelectorAll('.animate');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            
-            animatedElements.forEach(element => {
-                element.style.opacity = 0;
-                element.style.transform = 'translateY(20px)';
-                element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                observer.observe(element);
-            });
+  <!-- Domain Info -->
+  <section id="info">
+    <div class="container">
+      <h2 class="animate">Domain Insights</h2>
+      <table class="table animate">
+        <tr><th>Detail</th><th>Information</th></tr>
+        <tr><td><strong>Domain</strong></td><td>REDASP.com</td></tr>
+        <tr><td><strong>Meaning</strong></td><td>“Red Asp” — symbol of power and prestige</td></tr>
+        <tr><td><strong>Age</strong></td><td>23 years (established authority)</td></tr>
+        <tr><td><strong>Extension</strong></td><td>.com — the gold standard</td></tr>
+        <tr><td><strong>Archive</strong></td>
+          <td><a style="color:#ff7178" href="https://web.archive.org/web/20250000000000*/redasp.com" target="_blank" rel="noopener">Check on Archive.org</a></td>
+        </tr>
+      </table>
+    </div>
+  </section>
 
-            // Smooth scrolling for navigation
-            document.querySelectorAll('nav a').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                });
-            });
-        });
-    </script>
+  <!-- Use Cases -->
+  <section id="uses">
+    <div class="container">
+      <h2 class="animate">Possible Applications</h2>
+      <div class="grid">
+        <div class="card animate"><h3>Crypto & Blockchain</h3><p>Token, DeFi project, or exchange with a fierce animal brand.</p></div>
+        <div class="card animate"><h3>Luxury Brand</h3><p>Exclusivity, prestige, boldness for high-end products.</p></div>
+        <div class="card animate"><h3>Gaming / Esports</h3><p>Aggressive, memorable name for teams or platforms.</p></div>
+        <div class="card animate"><h3>Tech & SaaS</h3><p>Sharp identity for cutting-edge apps and services.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section id="cta">
+    <div class="container">
+      <div class="card span-12 animate">
+        <h2>Secure Your Premium Domain</h2>
+        <p style="color:var(--muted); margin:6px 0 18px">REDASP.com is rare and brand-perfect. Once it’s gone, it’s gone.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://unstoppabledomains.com/d/redasp.com" target="_blank" rel="noopener">Get REDASP.com Now</a>
+          <a class="btn btn-ghost" href="mailto:contact@redasp.com?subject=REDASP.com%20Offer">Contact Seller</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2025 REDASP.com • Premium Domain Name</footer>
+
+  <script>
+    // Smooth nav (works even if target missing)
+    document.querySelectorAll('nav a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',(e)=>{
+        const el = document.querySelector(a.getAttribute('href'));
+        if(!el) return;
+        e.preventDefault();
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    // Intersection reveal
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:.15 });
+
+    document.querySelectorAll('.animate').forEach(el=>io.observe(el));
+
+    // Subtle hero load-in (zoom + fade)
+    const hero = document.querySelector('.hero');
+    if(hero){
+      hero.style.opacity = 0; hero.style.transform = 'scale(1.02)';
+      hero.style.transition = 'opacity 900ms ease, transform 900ms ease';
+      requestAnimationFrame(()=>{ hero.style.opacity = 1; hero.style.transform = 'scale(1)'; });
+    }
+  </script>
 </body>
-
 </html>
-
