@@ -32,13 +32,10 @@
     body{
       margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       color:var(--text); background:var(--bg);
-      background-image:
-        linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.55)),
-        url('images/hero-bg.png'),
-        var(--grid);
-      background-size: cover, cover, 24px 24px;
-      background-attachment: fixed, fixed, fixed;
-      background-position: center, center, top left;
+      background-image: var(--grid);
+      background-size: 24px 24px;
+      background-attachment: fixed;
+      background-position: top left;
       letter-spacing:.2px;
     }
 
@@ -66,22 +63,26 @@
     }
     nav a:hover{ color:var(--text); }
 
-    /* Hero */
+    /* Hero - ARRIÈRE-PLAN QUI DÉFILE */
     .hero{
       min-height:88svh; display:grid; place-items:center;
       text-align:center; position:relative;
       padding:6rem 1rem 4rem;
       isolation:isolate;
-      /* Ajout de l'image d'arrière-plan pour la section Hero */
+      /* Arrière-plan qui défile avec le contenu */
       background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
                   url('images/hero-bg.png') no-repeat center center/cover;
+      background-attachment: scroll; /* Change from fixed to scroll */
     }
-    .hero::after{
-      content:""; position:absolute; inset:0; z-index:-1;
-      background:
-        radial-gradient(60% 40% at 50% 20%, rgba(227,6,19,.25), transparent 60%),
-        radial-gradient(40% 30% at 80% 70%, rgba(227,6,19,.18), transparent 65%),
-        linear-gradient(to bottom, rgba(5,5,9,.2), rgba(5,5,9,.65));
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent pour améliorer la lisibilité */
+      z-index: -1;
     }
     .badge{
       display:inline-flex; align-items:center; gap:.5rem;
@@ -93,12 +94,21 @@
     }
     .title{
       margin:1rem 0 .75rem; font-size:clamp(2.2rem, 6vw, 4rem); line-height:1.05; font-weight:900;
-      background:linear-gradient(135deg, var(--text) 20%, #ffbcc1 40%, var(--text) 60%);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      /* Texte mis en évidence avec fond semi-transparent */
+      background: linear-gradient(135deg, #ffffff 20%, #ffbcc1 40%, #ffffff 60%);
+      -webkit-background-clip:text; 
+      -webkit-text-fill-color:transparent; 
+      background-clip:text;
       text-shadow: 0 8px 40px rgba(227,6,19,.15);
+      padding: 10px 20px;
+      border-radius: 12px;
+      display: inline-block;
     }
     .subtitle{
       color:var(--muted); font-size:clamp(1rem, 2.2vw, 1.25rem); max-width:820px; margin:0 auto 2rem;
+      background: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour le sous-titre */
+      padding: 15px 25px;
+      border-radius: 10px;
     }
 
     .cta-row{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
@@ -224,7 +234,7 @@
       <div class="grid">
         <div class="card animate">
           <h3>Symbolic Power</h3>
-          <p>“Red Asp” — a striking snake linked to danger, wisdom, and royalty.</p>
+          <p>"Red Asp" — a striking snake linked to danger, wisdom, and royalty.</p>
         </div>
         <div class="card animate">
           <h3>Brand-Ready</h3>
@@ -236,7 +246,7 @@
         </div>
         <div class="card animate">
           <h3>Established Trust</h3>
-          <p>23 years old — credibility that new domains can’t match.</p>
+          <p>23 years old — credibility that new domains can't match.</p>
         </div>
         <div class="card animate">
           <h3>Marketing Advantage</h3>
@@ -253,7 +263,7 @@
       <table class="table animate">
         <tr><th>Detail</th><th>Information</th></tr>
         <tr><td><strong>Domain</strong></td><td>REDASP.com</td></tr>
-        <tr><td><strong>Meaning</strong></td><td>“Red Asp” — symbol of power and prestige</td></tr>
+        <tr><td><strong>Meaning</strong></td><td>"Red Asp" — symbol of power and prestige</td></tr>
         <tr><td><strong>Age</strong></td><td>23 years (established authority)</td></tr>
         <tr><td><strong>Extension</strong></td><td>.com — the gold standard</td></tr>
         <tr><td><strong>Archive</strong></td>
@@ -281,10 +291,10 @@
     <div class="container">
       <div class="card span-12 animate">
         <h2>Secure Your Premium Domain</h2>
-        <p style="color:var(--muted); margin:6px 0 18px">REDASP.com is rare and brand-perfect. Once it’s gone, it’s gone.</p>
+        <p style="color:var(--muted); margin:6px 0 18px">REDASP.com is rare and brand-perfect. Once it's gone, it's gone.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="https://unstoppabledomains.com/d/redasp.com" target="_blank" rel="noopener">Get REDASP.com Now</a>
-          <a class="btn btn-ghost" href="mailto:cryptogtd@gmail.com?subject=REDASP.com%20Offer">Contact Seller</a>
+          <a class="btn btn-ghost" href="mailto:contact@redasp.com?subject=REDASP.com%20Offer">Contact Seller</a>
         </div>
       </div>
     </div>
@@ -325,6 +335,3 @@
   </script>
 </body>
 </html>
-
-
-
