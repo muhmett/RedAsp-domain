@@ -1,6 +1,18 @@
-// script.js pour REDASP.com
 document.addEventListener('DOMContentLoaded', function() {
-  // Animation au défilement
+  // ===== Hero background animation =====
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    hero.style.opacity = 0;
+    hero.style.transform = 'scale(1.05)';
+    hero.style.transition = 'opacity 1.2s ease, transform 1.2s ease';
+
+    setTimeout(() => {
+      hero.style.opacity = 1;
+      hero.style.transform = 'scale(1)';
+    }, 300);
+  }
+
+  // ===== Animation on scroll =====
   const animatedElements = document.querySelectorAll('.animate');
   
   const observer = new IntersectionObserver((entries) => {
@@ -21,23 +33,21 @@ document.addEventListener('DOMContentLoaded', function() {
     observer.observe(element);
   });
 
-  // Navigation fluide
+  // ===== Smooth navigation =====
   document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
       const targetId = this.getAttribute('href');
       const targetElement = document.querySelector(targetId);
       
-      if (targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 100,
-          behavior: 'smooth'
-        });
-      }
+      window.scrollTo({
+        top: targetElement.offsetTop - 100,
+        behavior: 'smooth'
+      });
     });
   });
 
-  // Changement de thème (Dark / Light)
+  // ===== Theme switcher =====
   const themeToggle = document.createElement('button');
   themeToggle.innerHTML = '🌓';
   themeToggle.style.position = 'fixed';
@@ -64,14 +74,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  // Charger préférence thème sauvegardée
   if (localStorage.getItem('theme') === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
   }
   
   document.body.appendChild(themeToggle);
 
-  // Compteur de vues (simulation locale)
+  // ===== Page views counter =====
   const counterElement = document.createElement('div');
   counterElement.style.position = 'fixed';
   counterElement.style.bottom = '20px';
@@ -85,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let views = localStorage.getItem('pageViews') || 0;
   views = parseInt(views) + 1;
   localStorage.setItem('pageViews', views);
-  counterElement.textContent = `👁️ ${views} vues`;
+  counterElement.textContent = `👁️ ${views} views`;
   
   document.body.appendChild(counterElement);
 });
