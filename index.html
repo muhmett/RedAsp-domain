@@ -50,13 +50,31 @@
 
     .container{ max-width:1200px; margin:0 auto; padding:0 24px; }
 
-    /* Header (no logo per your request) */
+    /* Header avec logo */
     header{ position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px);
       background:linear-gradient(to right, rgba(10,12,18,.55), rgba(10,12,18,.35));
       border-bottom:1px solid var(--border);
     }
     .nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
-    .brand{ font-weight:800; letter-spacing:.5px; font-size:1rem; color:var(--muted); text-transform:uppercase; }
+    .brand{ 
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight:800; 
+      letter-spacing:.5px; 
+      font-size:1rem; 
+      color:var(--muted); 
+      text-transform:uppercase; 
+      text-decoration: none;
+    }
+    .logo-img {
+      height: 42px; /* Taille optimale pour le logo */
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+    .logo-img:hover {
+      transform: scale(1.05);
+    }
     nav ul{ display:flex; gap:22px; list-style:none; margin:0; padding:0; }
     nav a{
       color:var(--muted); text-decoration:none; font-weight:600; font-size:.95rem; transition:color .2s ease;
@@ -71,7 +89,7 @@
       isolation:isolate;
       /* Arrière-plan fixe qui ne défile pas */
       background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                  url('images/hero-bg.png') no-repeat center center/cover;
+                  url('images/hero-bg.jpg') no-repeat center center/cover;
       background-attachment: fixed; /* Fond fixe qui ne défile pas */
     }
     .badge{
@@ -83,7 +101,7 @@
       box-shadow: var(--glow);
     }
     .title{
-      margin:1rem 0 .75rem; font-size:clamp(2.2rem, 6vw, 4rem); line-height:1.05; font-weight:900;
+      margin:0.5rem 0 .75rem; font-size:clamp(2.2rem, 6vw, 4rem); line-height:1.05; font-weight:900;
       /* Texte mis en évidence avec contraste renforcé */
       color: #ffffff;
       text-shadow: 
@@ -126,9 +144,21 @@
     }
     .btn-ghost:hover{ transform:translateY(-2px); }
 
+    /* Logo avant la section Features */
+    .section-logo {
+      text-align: center;
+      margin: 0 auto 40px;
+      max-width: 200px;
+    }
+    .section-logo-img {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 15px rgba(227, 6, 19, 0.4));
+    }
+
     /* Sections */
     section{ padding:90px 0; }
-    h2{ font-size:clamp(1.6rem, 3.2vw, 2.4rem); margin:0 0 28px; }
+    h2{ font-size:clamp(1.6rem, 3.2vw, 2.4rem); margin:0 0 28px; text-align: center; }
     .grid{
       display:grid; gap:20px;
       grid-template-columns: repeat(12, 1fr);
@@ -166,9 +196,31 @@
     .table th{ color:#dfe2e6; font-weight:700; letter-spacing:.3px; }
     .table tr:last-child td{ border-bottom:none }
 
-    /* Footer */
-    footer{ padding:50px 0; color:var(--muted); text-align:center; border-top:1px solid var(--border);
-      background:linear-gradient(to right, rgba(10,12,18,.55), rgba(10,12,18,.35)); backdrop-filter: blur(8px);
+    /* Footer avec petit logo */
+    footer{ 
+      padding:30px 0; 
+      color:var(--muted); 
+      text-align:center; 
+      border-top:1px solid var(--border);
+      background:linear-gradient(to right, rgba(10,12,18,.55), rgba(10,12,18,.35)); 
+      backdrop-filter: blur(8px);
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .footer-logo {
+      width: 30px;
+      height: auto;
+      opacity: 0.8;
+    }
+    .footer-text {
+      flex-grow: 1;
+      text-align: center;
     }
 
     /* Animations */
@@ -186,15 +238,24 @@
       .title{ letter-spacing:.2px; padding: 10px 15px; font-size: clamp(1.8rem, 6vw, 3rem); }
       .cta-row{ gap:10px }
       section{ padding:70px 0 }
+      .logo-img { height: 36px; }
+      .section-logo { max-width: 150px; }
+      .footer-content {
+        flex-direction: column;
+        gap: 15px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <!-- Header (no logo) -->
+  <!-- Header avec logo -->
   <header>
     <div class="container nav">
-      <div class="brand">REDASP.COM</div>
+      <a href="#" class="brand">
+        <img src="images/logo-redasp.png" alt="REDASP Logo" class="logo-img">
+        REDASP.COM
+      </a>
       <nav>
         <ul>
           <li><a href="#features">Features</a></li>
@@ -221,9 +282,12 @@
     </div>
   </section>
 
-  <!-- Features -->
+  <!-- Features avec logo avant le titre -->
   <section id="features">
     <div class="container">
+      <div class="section-logo animate">
+        <img src="images/logo-redasp-medium.png" alt="REDASP" class="section-logo-img">
+      </div>
       <h2 class="animate">Why REDASP.com?</h2>
       <div class="grid">
         <div class="card animate">
@@ -294,7 +358,14 @@
     </div>
   </section>
 
-  <footer>© 2025 REDASP.com • Premium Domain Name</footer>
+  <!-- Footer avec petit logo -->
+  <footer>
+    <div class="footer-content">
+      <img src="images/logo-redasp-small.png" alt="REDASP" class="footer-logo">
+      <div class="footer-text">© 2025 REDASP.com • Premium Domain Name</div>
+      <div></div> <!-- Empty div for spacing -->
+    </div>
+  </footer>
 
   <script>
     // Smooth nav (works even if target missing)
@@ -329,4 +400,3 @@
   </script>
 </body>
 </html>
-
