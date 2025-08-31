@@ -1,6 +1,8 @@
 // script.js pour REDASP.com
 document.addEventListener('DOMContentLoaded', function() {
-  // Animation au défilement
+  /* ============================
+     Animation au défilement
+  ============================= */
   const animatedElements = document.querySelectorAll('.animate');
   
   const observer = new IntersectionObserver((entries) => {
@@ -8,52 +10,64 @@ document.addEventListener('DOMContentLoaded', function() {
       if (entry.isIntersecting) {
         entry.target.style.opacity = 1;
         entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target); // évite de rejouer plusieurs fois
       }
     });
-  }, {
-    threshold: 0.1
-  });
+  }, { threshold: 0.15 });
   
   animatedElements.forEach(element => {
     element.style.opacity = 0;
-    element.style.transform = 'translateY(20px)';
+    element.style.transform = 'translateY(30px)';
     element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
     observer.observe(element);
   });
 
-  // Navigation fluide
-  document.querySelectorAll('nav a').forEach(anchor => {
+  /* ============================
+     Navigation fluide
+  ============================= */
+  document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
-      const targetId = this.getAttribute('href');
-      const targetElement = document.querySelector(targetId);
-      
-      window.scrollTo({
-        top: targetElement.offsetTop - 100,
-        behavior: 'smooth'
-      });
+      const targetElement = document.querySelector(this.getAttribute('href'));
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   });
 
-  // Changement de thème (optionnel)
+  /* ============================
+     Dark/Light Mode Toggle
+  ============================= */
   const themeToggle = document.createElement('button');
   themeToggle.innerHTML = '🌓';
-  themeToggle.style.position = 'fixed';
-  themeToggle.style.bottom = '20px';
-  themeToggle.style.right = '20px';
-  themeToggle.style.zIndex = '1000';
-  themeToggle.style.background = 'var(--primary)';
-  themeToggle.style.color = 'white';
-  themeToggle.style.border = 'none';
-  themeToggle.style.borderRadius = '50%';
-  themeToggle.style.width = '50px';
-  themeToggle.style.height = '50px';
-  themeToggle.style.cursor = 'pointer';
-  themeToggle.style.fontSize = '1.5rem';
-  
+  Object.assign(themeToggle.style, {
+    position: 'fixed',
+    bottom: '20px',
+    right: '20px',
+    zIndex: '1000',
+    background: 'var(--primary)',
+    color: 'white',
+    border: 'none',
+    borderRadius: '50%',
+    width: '50px',
+    height: '50px',
+    cursor: 'pointer',
+    fontSize: '1.5rem',
+    boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+    transition: 'background 0.3s ease'
+  });
+
+  themeToggle.addEventListener('mouseenter', () => {
+    themeToggle.style.background = 'var(--primary-dark)';
+  });
+  themeToggle.addEventListener('mouseleave', () => {
+    themeToggle.style.background = 'var(--primary)';
+  });
+
   themeToggle.addEventListener('click', function() {
     const html = document.documentElement;
-    if (html.getAttribute('data-theme') === 'dark') {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    if (isDark) {
       html.removeAttribute('data-theme');
       localStorage.setItem('theme', 'light');
     } else {
@@ -61,30 +75,32 @@ document.addEventListener('DOMContentLoaded', function() {
       localStorage.setItem('theme', 'dark');
     }
   });
-  
-  // Vérifier la préférence de thème sauvegardée
+
   if (localStorage.getItem('theme') === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
   }
-  
+
   document.body.appendChild(themeToggle);
 
-  // Compteur de vues (exemple)
+  /* ============================
+     Compteur de vues (LocalStorage)
+  ============================= */
   const counterElement = document.createElement('div');
-  counterElement.style.position = 'fixed';
-  counterElement.style.bottom = '20px';
-  counterElement.style.left = '20px';
-  counterElement.style.background = 'var(--primary)';
-  counterElement.style.color = 'white';
-  counterElement.style.padding = '0.5rem 1rem';
-  counterElement.style.borderRadius = 'var(--radius)';
-  counterElement.style.fontSize = '0.9rem';
-  
-  // Simuler un compteur de vues (en réalité, il faudrait un backend)
-  let views = localStorage.getItem('pageViews') || 0;
-  views = parseInt(views) + 1;
+  Object.assign(counterElement.style, {
+    position: 'fixed',
+    bottom: '20px',
+    left: '20px',
+    background: 'var(--primary)',
+    color: 'white',
+    padding: '0.5rem 1rem',
+    borderRadius: 'var(--radius)',
+    fontSize: '0.9rem',
+    boxShadow: '0 4px 10px rgba(0,0,0,0.3)'
+  });
+
+  let views = parseInt(localStorage.getItem('pageViews') || "0") + 1;
   localStorage.setItem('pageViews', views);
   counterElement.textContent = `👁️ ${views} vues`;
-  
+
   document.body.appendChild(counterElement);
 });
